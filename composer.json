@@ -1,0 +1,16 @@
+{
+  "name": "shiki/yii-sentry",
+  "type": "library",
+  "description": "A Yii Framework extension for logging to Sentry (getsentry.com). Uses raven-php internally as the Sentry client.",
+  "keywords": ["raven", "sentry", "yii"],
+  "homepage": "https://github.com/shiki/yii-sentry",
+  "license": "MIT",
+  "require": {
+    "raven/raven": ">=0.2.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "YSentry\\": "lib"
+    }
+  }
+}
