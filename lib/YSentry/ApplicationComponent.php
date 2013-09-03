@@ -185,6 +185,9 @@ class ApplicationComponent extends \CApplicationComponent
    */
   public function onEndRequestEvent(\CEvent $event)
   {
+    $this->detectShutdown();
+    $this->getClient()->sendUnsentErrors();
+
     if (!($lastError = error_get_last()))
       return;
 
@@ -247,6 +250,17 @@ class ApplicationComponent extends \CApplicationComponent
   protected function reserveMemoryForShutdownHandling($size = 10)
   {
     $this->_reservedMemory = str_repeat('x', 1024 * $size);
+  }
+
+  /**
+   *  Taken from {@link Raven_ErrorHandler}, sets a shutdown flag so the client will not store
+   *  errors for bulk sending. See {@link Raven_Client}.
+   */
+  public function detectShutdown()
+  {
+    if (!defined('RAVEN_CLIENT_END_REACHED')) {
+      define('RAVEN_CLIENT_END_REACHED', true);
+    }
   }
 }
 
