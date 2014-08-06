@@ -146,10 +146,11 @@ class ApplicationComponent extends \CApplicationComponent
    * method for fine-grained control on what type of exceptions you want to be sent to Sentry.
    *
    * @param Exception $e
+   * @param array|null $params
    */
-  protected function captureException(\Exception $e)
+  protected function captureException(\Exception $e, $params = null)
   {
-    $this->getClient()->captureException($e);
+    $this->getClient()->captureException($e, $params);
   }
 
   /**
